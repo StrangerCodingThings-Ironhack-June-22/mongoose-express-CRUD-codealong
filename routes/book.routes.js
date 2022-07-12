@@ -23,7 +23,17 @@ router.get("/books", (req, res, next) => {
 
 // CREATE: Render form
 router.get("/books/create", (req, res) => {
-  res.render("books/book-create");
+
+  Author.find()
+    .then( authorsArr => {
+      res.render("books/book-create", {authorsArr});
+    })
+    .catch( (error) => {
+      console.log("Error getting authors from DB", error);
+      next(error);
+    })
+
+  
 })
 
 // CREATE: Process form
