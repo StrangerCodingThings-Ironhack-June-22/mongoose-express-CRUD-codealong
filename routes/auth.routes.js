@@ -100,6 +100,15 @@ router.post("/login", (req, res, next) => {
 })
 
 
+// Logout
+router.post('/logout', (req, res, next) => {
+  req.session.destroy(err => {
+    if (err) next(err);
+    res.redirect('/');
+  });
+});
+
+
 // Profile page
 router.get('/user-profile', (req, res, next) => {
   res.render('auth/user-profile', {user: req.session.currentUser});

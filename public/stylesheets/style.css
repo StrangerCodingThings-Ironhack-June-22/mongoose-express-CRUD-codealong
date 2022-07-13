@@ -11,6 +11,14 @@ h1 {
   color: 15px;
 }
 
+nav {
+  text-align: center;
+}
+
+nav form {
+  display: inline-block;
+}
+
 .warning {
   border: 1px solid rgb(167, 111, 9);
   background-color: rgb(235, 212, 170);
