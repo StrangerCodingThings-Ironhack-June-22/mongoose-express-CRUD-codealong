@@ -6,7 +6,7 @@ const router = require("express").Router();
 const checkIfLoggedIn = require("../middleware/checkIfLoggedIn");
 
 // READ: List all books
-router.get("/books", (req, res, next) => {
+router.get("/", (req, res, next) => {
   Book.find()
     .populate("author")
     .then( (booksFromDB) => {
@@ -23,7 +23,7 @@ router.get("/books", (req, res, next) => {
 
 
 // CREATE: Render form
-router.get("/books/create", checkIfLoggedIn, (req, res) => {
+router.get("/create", checkIfLoggedIn, (req, res) => {
 
   Author.find()
     .then( authorsArr => {
@@ -38,7 +38,7 @@ router.get("/books/create", checkIfLoggedIn, (req, res) => {
 })
 
 // CREATE: Process form
-router.post("/books/create", checkIfLoggedIn, (req, res) => {
+router.post("/create", checkIfLoggedIn, (req, res) => {
 
   const bookDetails = {
     title: req.body.title,
@@ -58,7 +58,7 @@ router.post("/books/create", checkIfLoggedIn, (req, res) => {
 })
 
 // READ: Book details
-router.get("/books/:bookId", (req, res) => {
+router.get("/:bookId", (req, res) => {
   const bookId = req.params.bookId;
 
   Book.findById(bookId)
@@ -75,7 +75,7 @@ router.get("/books/:bookId", (req, res) => {
 
 
 // UPDATE: Render form
-router.get("/books/:bookId/edit", checkIfLoggedIn, (req, res) => {
+router.get("/:bookId/edit", checkIfLoggedIn, (req, res) => {
   const {bookId} = req.params;
 
   Book.findById(bookId)
@@ -91,7 +91,7 @@ router.get("/books/:bookId/edit", checkIfLoggedIn, (req, res) => {
 
 
 // UPDATE: Process form
-router.post("/books/:bookId/edit", checkIfLoggedIn, (req, res) => {
+router.post("/:bookId/edit", checkIfLoggedIn, (req, res) => {
 
   const bookId = req.params.bookId;
 
@@ -118,7 +118,7 @@ router.post("/books/:bookId/edit", checkIfLoggedIn, (req, res) => {
 
 
 // DELETE: delete book
-router.post("/books/:bookId/delete", checkIfLoggedIn, (req, res) => {
+router.post("/:bookId/delete", checkIfLoggedIn, (req, res) => {
   const {bookId} = req.params;
 
   Book.findByIdAndRemove(bookId)
