@@ -23,7 +23,7 @@ router.get("/", (req, res, next) => {
 
 
 // CREATE: Render form
-router.get("/create", checkIfLoggedIn, (req, res) => {
+router.get("/create", checkIfLoggedIn, (req, res, next) => {
 
   Author.find()
     .then( authorsArr => {
@@ -38,7 +38,7 @@ router.get("/create", checkIfLoggedIn, (req, res) => {
 })
 
 // CREATE: Process form
-router.post("/create", checkIfLoggedIn, (req, res) => {
+router.post("/create", checkIfLoggedIn, (req, res, next) => {
 
   const bookDetails = {
     title: req.body.title,
@@ -58,7 +58,7 @@ router.post("/create", checkIfLoggedIn, (req, res) => {
 })
 
 // READ: Book details
-router.get("/:bookId", (req, res) => {
+router.get("/:bookId", (req, res, next) => {
   const bookId = req.params.bookId;
 
   Book.findById(bookId)
@@ -75,7 +75,7 @@ router.get("/:bookId", (req, res) => {
 
 
 // UPDATE: Render form
-router.get("/:bookId/edit", checkIfLoggedIn, (req, res) => {
+router.get("/:bookId/edit", checkIfLoggedIn, (req, res, next) => {
   const {bookId} = req.params;
 
   Book.findById(bookId)
@@ -91,7 +91,7 @@ router.get("/:bookId/edit", checkIfLoggedIn, (req, res) => {
 
 
 // UPDATE: Process form
-router.post("/:bookId/edit", checkIfLoggedIn, (req, res) => {
+router.post("/:bookId/edit", checkIfLoggedIn, (req, res, next) => {
 
   const bookId = req.params.bookId;
 
@@ -118,7 +118,7 @@ router.post("/:bookId/edit", checkIfLoggedIn, (req, res) => {
 
 
 // DELETE: delete book
-router.post("/:bookId/delete", checkIfLoggedIn, (req, res) => {
+router.post("/:bookId/delete", checkIfLoggedIn, (req, res, next) => {
   const {bookId} = req.params;
 
   Book.findByIdAndRemove(bookId)

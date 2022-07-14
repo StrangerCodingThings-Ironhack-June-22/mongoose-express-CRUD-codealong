@@ -8,7 +8,7 @@ const saltRounds = 10;
 
 
 // Display signup form
-router.get("/signup", (req, res) => {
+router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 

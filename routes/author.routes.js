@@ -3,7 +3,7 @@ const Book = require("../models/Book.model");
 
 const router = require("express").Router();
 
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   let books; // we create a variable in the parent scope
 
   Book.find()
